@@ -79,9 +79,6 @@ jobs:
           if [[ "$TARGET_ARCH" != universal ]]; then options+=("mac-$TARGET_ARCH"); fi
           ./"$REPO_NAME"/Telegram/build/prepare/mac.sh "${options[@]}"
 
-      - name: Free disk space
-        run: find Libraries '(' '(' ! '(' -name '*.a' -o -name '*.h' -o -name '*.hpp' -o -name '*.inc' -o -name '*.cmake' -o -name '*.pc' -o -path '*/include/*' -o -path '*/objects-*' -o -path '*/cache_keys/*' -o -path '*/patches/*' -o -perm +111 ')' -type f ')' -o -empty ')' -delete
-
       - name: Save libraries cache
         if: steps.libraries-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v6
